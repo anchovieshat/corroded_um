@@ -1,0 +1,10 @@
+[package]
+name = "corroded_machine"
+version = "0.1.0"
+authors = ["Colin Davidson <colin@pentaquine.com>"]
+
+[dependencies]
+byteorder = "*"
+
+[profile.release]
+lto = true
