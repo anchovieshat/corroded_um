@@ -5,6 +5,7 @@ authors = ["Colin Davidson <colin@pentaquine.com>"]
 
 [dependencies]
 byteorder = "*"
+cpuprofiler = "*"
 
 [profile.release]
 lto = true

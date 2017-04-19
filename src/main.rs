@@ -1,4 +1,5 @@
 extern crate byteorder;
+extern crate cpuprofiler;
 
 use std::fs::File;
 use std::io::Read;
@@ -6,6 +7,7 @@ use std::io::Cursor;
 use std::collections::HashMap;
 
 use byteorder::{BigEndian, ReadBytesExt};
+use cpuprofiler::PROFILER;
 
 fn main() {
     let mut f = File::open("sandmark.umz").unwrap();
@@ -29,8 +31,11 @@ fn main() {
     let mut next_mem = 1;
     let mut pc = 0;
 
+    let mut counter = 0;
     let mut running = true;
-    while running {
+
+    PROFILER.lock().unwrap().start("./my-prof.profile").expect("Couldn't start");
+    while running && counter < 1000000 {
         let inst = memory.get(&0).unwrap()[pc as usize];
         pc += 1;
 
@@ -91,5 +96,8 @@ fn main() {
                 _ => { unimplemented!(); }
             }
         }
+        counter += 1;
     }
+
+    PROFILER.lock().unwrap().stop().expect("Couldn't stop");
 }
