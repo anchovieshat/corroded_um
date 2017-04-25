@@ -40,7 +40,12 @@ fn main() {
         let inst = memory.get(&0).unwrap()[pc as usize];
         pc += 1;
 
+        if pc == 1184 {
+            running = false;
+        }
+
         let op = inst >> 28;
+        println!("[{}] {}: {:?}", pc, op, reg);
         if op == 13 {
             let a = (inst >> 25) & 7;
             let num = inst & 0x01FFFFFF;
