@@ -5,7 +5,6 @@ authors = ["Colin Davidson <colin@pentaquine.com>"]
 
 [dependencies]
 byteorder = "*"
-fnv = "*"
 
 [profile.release]
 lto = true
